@@ -4,24 +4,29 @@ $list = ["@jcunniet","@PaulLampon","@Aziliz31","@ssoumier","@marionsouzeau","@ga
 #intermediary methods-----------------
 #-----to let the user choose what she wants
 def user_interface
-  puts "Bonjour, ceci est un programme qui analyse\nune liste d'username Twitter des journalistes."
-  puts "Quelle donnée vous intéresse-elle ？"
-  puts "------------"
-  puts "Tapez un des choix proposés dessous"
-  puts "---1. Le nombre de journalistes dans la liste"
-  puts "---2. Le nombre d'usernames contenant un numéro"
-  puts "---3. Le nombre d'usernames contenant la combinaison des lettres 'aude' à la suite"
-  puts "---4. Le nombre d'usernames commençant par une majuscule"
-  puts "---5. Le nombre d'usernames contenant une et une seule majuscule"
-  puts "---6. Le nombre d'underscore dans cette liste"
-  puts "---7. La position de @epenser dans cette liste"
-  puts "---8. Cette liste triée par ordre alphabétique A-Z"
-  puts "---9. Les 50 usernames les plus courts de cette liste"
-  puts "---0. Pour terminer le programme"
-  puts "---L ou l pour revoir la liste de choix"
-  puts "---T ou t pour tout voir."
+  puts "---------------------------------------------------"
+  puts "----Bonjour, ceci est un programme qui analyse ----"
+  puts "----une liste d'username Twitter des journalistes--"
+  puts "---------------------------------------------------"
+  puts "----Quelle donnée vous intéresse-elle ？-----------"
+  puts "---------------------------------------------------"
+  puts "----Tapez un des choix proposés dessous------------"
+  puts "----1. Le nombre de journalistes dans la liste"
+  puts "----2. Le nombre d'usernames contenant un numéro"
+  puts "----3. Le nombre d'usernames contenant la combinaison"
+  puts "      des lettres 'aude' à la suite"
+  puts "----4. Le nombre d'usernames commençant par une majuscule"
+  puts "----5. Le nombre d'usernames contenant une et une seule majuscule"
+  puts "----6. Le nombre d'underscore dans cette liste"
+  puts "----7. La position de @epenser dans cette liste"
+  puts "----8. Cette liste triée par ordre alphabétique A-Z"
+  puts "----9. Les 50 usernames les plus courts de cette liste"
+  puts "---------------------------------------------------"
+  puts "----T ou t pour tout voir.-------------------------"
+  puts "----X ou x Pour terminer le programme--------------"
   puts "Tapez votre réponse :"
   puts ">>  "
+  puts "---------------------------------------------------"
   return gets.chomp
 end
 
@@ -35,9 +40,59 @@ def has_one_cap?(str)
      return i == 1
   end
 end
-#--------------methodes that really answers those questions-----
 
+#-----to put stuffs together
+def run(input)
+  while TRUE
+    case input
+    when '1'
+      puts _1_count_jour
+    when '2'
+      puts _2_count_num
+    when '3'
+      puts _3_count_aude
+    when '4'
+      puts _4_count_start_cap
+    when '5'
+      puts _5_count_one_cap
+    when "6"
+      puts _6_count_underscore
+    when "7"
+      puts _7_position("@epenser")
+    when '8'
+      _8_sort
+    when '9'
+      _9_50short
+    when 'x' || 'X'
+      puts "Au revoir"
+      exit!
+    when 't' || 'T'
+      puts _1_count_jour
+      puts _2_count_num
+      puts _3_count_aude
+      puts _4_count_start_cap
+      puts _5_count_one_cap
+      puts _6_count_underscore
+      puts _7_position("@epenser")
+      _8_sort
+      _9_50short
+      puts"------------------------------------"
+      puts"Vous avez tout vu. Au revoir"
+      exit!
+    end
+    puts "-------------------------------------"
+    puts "Voulez vous voir d'autres choses ?"
+    puts '>> '
+    input = gets.chomp
+  end
+end
 
+#-----to run prog
+def perform
+  run(user_interface)
+end
+
+#methods that really answers those questions-----
 # 1.pour compter le nombre de journalites
 def _1_count_jour
   puts "La liste contient #{$list.length} journalistes."
@@ -102,7 +157,6 @@ def _6_count_underscore
   return "Cette liste comporte en tout #{i} underscores."
 end
 
-
 # 7.pour la position de @epenser
 def _7_position(username)
   i = 1
@@ -130,52 +184,8 @@ def _9_50short
   puts""
 end
 
-def run(input)
-  while input != 0
-    case input
-    when '1'
-      puts _1_count_jour
-    when '2'
-      puts _2_count_num
-    when '3'
-      puts _3_count_aude
-    when '4'
-      puts _4_count_start_cap
-    when '5'
-      puts _5_count_one_cap
-    when "6"
-      puts _6_count_underscore
-    when "7"
-      puts _7_position("@epenser")
-    when '8'
-      _8_sort
-    when '9'
-      _9_50short
-    when '0'
-      puts "Au revoir"
-      exit!
-    when 'l' || 'L'
-      user_interface
-    when 't' || 'T'
-      puts _1_count_jour
-      puts _2_count_num
-      puts _3_count_aude
-      puts _4_count_start_cap
-      puts _5_count_one_cap
-      puts _6_count_underscore
-      puts _7_position("@epenser")
-      _8_sort
-      _9_50short
-      puts"-----"
-      puts"Vous avez tout vu. Au revoir"
-      exit!
-    end
-    puts "--------"
-    puts "Voulez vous voir d'autres choses ?\n(L ou l pour revoir les choix)"
-    puts '>> '
-    input = gets.chomp
-  end
-end
 
 
-run(user_interface)
+
+#----------------
+perform
